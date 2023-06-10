@@ -4,10 +4,10 @@ import * as fs from 'node:fs';
 // import _ from 'lodash';
 import compareFiles from '../src/compareFiles.js';
 
-const absolutePath1 = './src/files/file1.json';
-const absolutePath2 = './src/files/file2.json';
-const filepath3 = 'src/files/file3.json';
-const filepath4 = 'src/files/file4.json';
+const absolutePath1 = './__fixtures__/files/file1.json';
+const absolutePath2 = './__fixtures__/files/file2.json';
+const filepath3 = '__fixtures__/files/file3.json';
+const filepath4 = '__fixtures__/files/file4.json';
 
 const expectedData = { plain: [] };
 
