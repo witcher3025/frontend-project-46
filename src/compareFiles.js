@@ -3,6 +3,7 @@
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import _ from 'lodash';
+import * as yaml from 'js-yaml';
 
 const normalizePath = (filepath) => {
   const workingDir = process.cwd();
@@ -11,6 +12,10 @@ const normalizePath = (filepath) => {
 
 const createObject = (filepath) => {
   const fileData = fs.readFileSync(filepath, 'utf-8');
+  if (filepath.endsWith('.yaml')) {
+    return yaml(fileData, { json: true });
+  }
+
   return JSON.parse(fileData);
 };
 
