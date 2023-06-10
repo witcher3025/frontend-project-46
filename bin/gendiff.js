@@ -3,7 +3,7 @@
 /* eslint-disable no-console, import/extensions */
 
 import { Command } from 'commander';
-import compareFiles from '../src/compareFiles.js';
+import genDiff from '../src/genDiff.js';
 
 const program = new Command();
 
@@ -15,7 +15,7 @@ program
   .argument('<filepath2>', 'path to file2')
   .option('-f, --style <type>', 'output format')
   .action((filepath1, filepath2) => {
-    const result = compareFiles(filepath1, filepath2);
+    const result = genDiff(filepath1, filepath2);
     console.log(result);
   });
 

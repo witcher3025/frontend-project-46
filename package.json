@@ -1,10 +1,10 @@
 {
   "name": "@hexlet/code",
   "version": "1.0.0",
-  "description": "[![Actions Status](https://github.com/witcher3025/frontend-project-46/workflows/hexlet-check/badge.svg)](https://github.com/witcher3025/frontend-project-46/actions)",
-  "main": "./bin/genDiff.js",
+  "description": "A program that finds differences between two data structures.",
+  "main": "src/genDiff.js",
   "bin": {
-    "genDiff": "./bin/genDiff.js"
+    "gendiff": "bin/gendiff.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
