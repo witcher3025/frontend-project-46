@@ -1,8 +1,7 @@
 /* eslint-disable no-console, import/extensions */
 
 import * as fs from 'node:fs';
-// import _ from 'lodash';
-import compareFiles from '../src/compareFiles.js';
+import genDiff from '../src/genDiff.js';
 
 const filepath1 = './__fixtures__/files/file1.json';
 const filepath2 = './__fixtures__/files/file2.json';
@@ -26,7 +25,7 @@ beforeAll(() => {
 
 describe.each(cases)('', (caseIndex, file1, file2) => {
   test(`diff ${caseIndex + 1}`, () => {
-    const actual = compareFiles(file1, file2);
+    const actual = genDiff(file1, file2);
     const expected = expectedData.plain[caseIndex];
 
     expect(actual).toEqual(expected);
