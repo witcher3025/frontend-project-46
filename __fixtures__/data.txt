@@ -1,0 +1,51 @@
+{
+  - follow: false
+    host: hexlet.io
+  - proxy: 123.234.53.22
+  - timeout: 50
+  + timeout: 20
+  + verbose: true
+}
+
+###
+
+{
+  - host: hexlet.io
+  + host: reddit.com
+  - timeout: 20
+  + timeout: 75
+  - verbose: true
+  + verbose: false
+}
+
+###
+
+{
+  - host: reddit.com
+  + host: hexlet.io
+  - timeout: 75
+  + timeout: 20
+  - verbose: false
+  + verbose: true
+}
+
+###
+
+{
+    follow: false
+    host: hexlet.io
+  + ip: 192.0.2.235
+  + protocol: ftp
+    proxy: 123.234.53.22
+    timeout: 50
+  + verbose: true
+}
+
+###
+
+{
+    follow: false
+    host: hexlet.io
+    proxy: 123.234.53.22
+    timeout: 50
+}
