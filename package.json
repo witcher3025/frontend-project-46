@@ -1,9 +1,8 @@
 {
   "name": "@hexlet/code",
   "version": "1.0.0",
-  "type": "module",
   "description": "[![Actions Status](https://github.com/witcher3025/frontend-project-46/workflows/hexlet-check/badge.svg)](https://github.com/witcher3025/frontend-project-46/actions)",
-  "main": "index.js",
+  "main": "genDiff.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,6 +15,7 @@
   "bugs": {
     "url": "https://github.com/witcher3025/frontend-project-46/issues"
   },
+  "type": "module",
   "homepage": "https://github.com/witcher3025/frontend-project-46#readme",
   "dependencies": {
     "commander": "^10.0.1",
