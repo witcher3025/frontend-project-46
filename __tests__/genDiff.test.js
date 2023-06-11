@@ -12,8 +12,8 @@ const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8'
 
 const filepath1 = './__fixtures__/files/file1.json';
 const filepath2 = './__fixtures__/files/file2.json';
-const filepath3 = '__fixtures__/files/file3.json';
-const filepath4 = '__fixtures__/files/file4.json';
+const filepath3 = '__fixtures__/files/file3.yaml';
+const filepath4 = '__fixtures__/files/file4.yml';
 
 const cases = [
   [0, filepath1, filepath2],

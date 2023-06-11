@@ -2,8 +2,8 @@
 
 import * as fs from 'node:fs';
 import * as path from 'node:path';
-import * as yaml from 'js-yaml';
 import compareFiles from './compareFiles.js';
+import parser from './parsers.js';
 
 const normalizePath = (filepath) => {
   const workingDir = process.cwd();
@@ -11,19 +11,14 @@ const normalizePath = (filepath) => {
 };
 
 const getExtension = (filepath) => path.extname(filepath).slice(1);
-
-const createObject = (filepath) => {
-  const fileData = fs.readFileSync(filepath, 'utf-8');
-  if (getExtension(filepath) === 'yaml') {
-    return yaml(fileData, { json: true });
-  }
-
-  return JSON.parse(fileData);
-};
+const readFile = (filepath) => fs.readFileSync(filepath, 'utf-8');
 
 const genDiff = (filepath1, filepath2) => {
-  const object1 = createObject(normalizePath(filepath1));
-  const object2 = createObject(normalizePath(filepath2));
+  const fileData1 = readFile(normalizePath(filepath1));
+  const fileData2 = readFile(normalizePath(filepath2));
+
+  const object1 = parser(fileData1, getExtension(filepath1));
+  const object2 = parser(fileData2, getExtension(filepath2));
   return compareFiles(object1, object2);
 };
 
