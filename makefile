@@ -5,10 +5,13 @@ publish:
 	npm publish --dry-run
 
 jest:
-	NODE_OPTIONS=--experimental-vm-modules npx jest
+	npx jest
 
-coverage:
-	NODE_OPTIONS=--experimental-vm-modules npx jest --coverage
+jest-watch:
+	npx jest --watch
+
+test-coverage:
+	npx jest --coverage
 
 lint:
 	npx eslint .
