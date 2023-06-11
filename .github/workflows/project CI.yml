@@ -1,0 +1,28 @@
+name: project CI
+on: push
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        node-version: [18.x]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - name: install
+        run: npm install
+      - name: run linter check
+        run: npm run lint
+      - name: run tests
+        run: npm test
+      - name: test coverage
+        uses: paambaati/codeclimate-action@v3.0.0
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTERS_ID }}
+        with:
+          coverageCommand: make test-coverage
+          debug: true
