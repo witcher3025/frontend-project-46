@@ -4,7 +4,7 @@ install:
 publish:
 	npm publish --dry-run
 
-jest:
+test:
 	npx jest
 
 jest-watch:
