@@ -2,10 +2,9 @@ name: project CI
 on: push
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
         node-version: [18.x]
     steps:
       - uses: actions/checkout@v3
