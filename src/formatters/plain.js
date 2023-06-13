@@ -10,6 +10,26 @@ const validateValue = (value) => {
   return typeof value === 'string' ? `'${value}'` : value;
 };
 
+const generateLines = (state, key, value) => {
+  if (state === 'removed') {
+    return `Property '${key}' was ${state}`;
+  }
+
+  if (state === 'added') {
+    const validValue = validateValue(value);
+    return `Property '${key}' was ${state} with value: ${validValue}`;
+  }
+
+  if (state === 'updated') {
+    const { oldValue, newValue } = value;
+    const validOldValue = validateValue(oldValue);
+    const validNewValue = validateValue(newValue);
+    return `Property '${key}' was ${state}. From ${validOldValue} to ${validNewValue}`;
+  }
+
+  return '';
+};
+
 const getPlain = (diff) => {
   const iter = (node, pathKey) => {
     const lines = node.flatMap(({ key, value, status }) => {
@@ -20,29 +40,15 @@ const getPlain = (diff) => {
         return iter(value, newPathKey);
       }
 
-      if (status === 'updated') {
-        const { oldValue, newValue } = value;
-        const validOldValue = validateValue(oldValue);
-        const validNewValue = validateValue(newValue);
-        return `Property '${currentKey}' was ${status}. From ${validOldValue} to ${validNewValue}`;
-      }
-
-      if (status === 'added') {
-        const validValue = validateValue(value);
-        return `Property '${currentKey}' was ${status} with value: ${validValue}`;
-      }
-
-      if (status === 'removed') {
-        return `Property '${currentKey}' was ${status}`;
-      }
-
-      return [];
+      return generateLines(status, currentKey, value);
     });
 
     return lines;
   };
 
-  return iter(diff, []).join('\n');
+  const result = iter(diff, []);
+  const filtered = result.filter((elem) => elem !== '').join('\n');
+  return filtered;
 };
 
 export default getPlain;
