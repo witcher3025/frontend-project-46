@@ -36,7 +36,7 @@ beforeAll(() => {
 describe.each(cases)('stylish format', (caseIndex, file1, file2) => {
   test(`diff stylish ${caseIndex + 1}`, () => {
     const actual = genDiff(file1, file2, 'stylish');
-    const expected = stylishCase.toStylish[caseIndex];
+    const expected = stylishCase[caseIndex];
 
     expect(actual).toEqual(expected);
   });
@@ -45,7 +45,7 @@ describe.each(cases)('stylish format', (caseIndex, file1, file2) => {
 describe.each(cases)('plain format', (caseIndex, file1, file2) => {
   test(`diff plain ${caseIndex + 1}`, () => {
     const actual = genDiff(file1, file2, 'plain');
-    const expected = plainCase.toPlain[caseIndex];
+    const expected = plainCase[caseIndex];
 
     expect(actual).toEqual(expected);
   });
@@ -54,7 +54,7 @@ describe.each(cases)('plain format', (caseIndex, file1, file2) => {
 describe.each(cases)('json format', (caseIndex, file1, file2) => {
   test(`diff json ${caseIndex + 1}`, () => {
     const actual = genDiff(file1, file2, 'json');
-    const expected = jsonCase.toJson[caseIndex];
+    const expected = jsonCase[caseIndex];
 
     expect(actual).toEqual(expected);
   });
