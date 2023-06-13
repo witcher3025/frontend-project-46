@@ -15,7 +15,7 @@ Utility features:
 
 ### Run
 
-    gendiff --format <format> <filepath1> <filepath1>
+    gendiff --format <format> <filepath1> <filepath2>
 
 ### Demo
 
