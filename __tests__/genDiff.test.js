@@ -19,22 +19,24 @@ const cases = [
   [1, filepath1, filepath3],
 ];
 
-const expectedData = {};
+let jsonCase;
+let plainCase;
+let stylishCase;
 
 beforeAll(() => {
   const jsonData = readFile('json data.txt');
   const plainData = readFile('plain data.txt');
   const stylishData = readFile('stylish data.txt');
 
-  expectedData.toJson = jsonData.split('###').map((str) => str.trim());
-  expectedData.toPlain = plainData.split('###').map((str) => str.trim());
-  expectedData.toStylish = stylishData.split('###').map((str) => str.trim());
+  jsonCase = jsonData.split('###').map((str) => str.trim());
+  plainCase = plainData.split('###').map((str) => str.trim());
+  stylishCase = stylishData.split('###').map((str) => str.trim());
 });
 
 describe.each(cases)('stylish format', (caseIndex, file1, file2) => {
   test(`diff stylish ${caseIndex + 1}`, () => {
     const actual = genDiff(file1, file2, 'stylish');
-    const expected = expectedData.toStylish[caseIndex];
+    const expected = stylishCase.toStylish[caseIndex];
 
     expect(actual).toEqual(expected);
   });
@@ -43,7 +45,7 @@ describe.each(cases)('stylish format', (caseIndex, file1, file2) => {
 describe.each(cases)('plain format', (caseIndex, file1, file2) => {
   test(`diff plain ${caseIndex + 1}`, () => {
     const actual = genDiff(file1, file2, 'plain');
-    const expected = expectedData.toPlain[caseIndex];
+    const expected = plainCase.toPlain[caseIndex];
 
     expect(actual).toEqual(expected);
   });
@@ -52,7 +54,7 @@ describe.each(cases)('plain format', (caseIndex, file1, file2) => {
 describe.each(cases)('json format', (caseIndex, file1, file2) => {
   test(`diff json ${caseIndex + 1}`, () => {
     const actual = genDiff(file1, file2, 'json');
-    const expected = expectedData.toJson[caseIndex];
+    const expected = jsonCase.toJson[caseIndex];
 
     expect(actual).toEqual(expected);
   });
