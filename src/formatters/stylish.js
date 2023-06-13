@@ -33,14 +33,18 @@ const getStylish = (diff) => {
   const iter = (node, depth) => {
     const lines = node.flatMap(({ key, value, status }) => {
       const updateDepth = depth + 1;
+
       if (status === 'nested') {
         return getLine(key, iter(value, updateDepth), chars.unchanged, updateDepth);
       }
 
       if (status === 'changed') {
+        const oldValue = prepareValue(value.oldValue, updateDepth);
+        const newValue = prepareValue(value.newValue, updateDepth);
+
         return [
-          getLine(key, prepareValue(value.oldValue, updateDepth), chars.deleted, updateDepth),
-          getLine(key, prepareValue(value.newValue, updateDepth), chars.added, updateDepth),
+          getLine(key, oldValue, chars.deleted, updateDepth),
+          getLine(key, newValue, chars.added, updateDepth),
         ];
       }
 
