@@ -14,3 +14,4 @@
 
 <a href="https://asciinema.org/a/591211" target="_blank"><img src="https://asciinema.org/a/591211.svg" /></a>
 
+<a href="https://asciinema.org/a/591226" target="_blank"><img src="https://asciinema.org/a/591226.svg" /></a>
