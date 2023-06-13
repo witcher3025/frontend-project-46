@@ -10,50 +10,38 @@ const __dirname = path.dirname(__filename);
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
 
-const plainFilepath1 = './__fixtures__/files_plane/file1.json';
-const plainFilepath2 = './__fixtures__/files_plane/file2.json';
-const plainFilepath3 = '__fixtures__/files_plane/file3.yaml';
-const plainFilepath4 = '__fixtures__/files_plane/file4.yml';
+const filepath1 = './__fixtures__/files/file1.json';
+const filepath2 = './__fixtures__/files/file2.json';
+const filepath3 = '__fixtures__/files/file3.yml';
 
-const plainCases = [
-  [0, plainFilepath1, plainFilepath2],
-  [1, plainFilepath2, plainFilepath4],
-  [2, plainFilepath4, plainFilepath2],
-  [3, plainFilepath1, plainFilepath3],
-  [4, plainFilepath1, plainFilepath1],
+const cases = [
+  [0, filepath1, filepath2],
+  [1, filepath1, filepath3],
 ];
 
-const nestedFilepath1 = './__fixtures__/files_nested/file1.json';
-const nestedFilepath2 = './__fixtures__/files_nested/file2.json';
-const nestedFilepath3 = '__fixtures__/files_nested/file3.yml';
-
-const nestedCases = [
-  [0, nestedFilepath1, nestedFilepath2],
-  [1, nestedFilepath1, nestedFilepath3],
-];
-
-const expectedData = { nested: [], plain: [] };
+const expectedData = { toStylish: [], toPlain: [] };
 
 beforeAll(() => {
-  const plainData = readFile('plane.txt');
-  const nestedData = readFile('nested.txt');
-  expectedData.plain = plainData.split('###').map((str) => str.trim());
-  expectedData.nested = nestedData.split('###').map((str) => str.trim());
+  const stylishData = readFile('stylish data.txt');
+  const plainData = readFile('plain data.txt');
+
+  expectedData.toStylish = stylishData.split('###').map((str) => str.trim());
+  expectedData.toPlain = plainData.split('###').map((str) => str.trim());
 });
 
-describe.each(plainCases)('', (caseIndex, file1, file2) => {
-  test(`plain diff ${caseIndex + 1}`, () => {
-    const actual = genDiff(file1, file2);
-    const expected = expectedData.plain[caseIndex];
+describe.each(cases)('', (caseIndex, file1, file2) => {
+  test(`diff stylish ${caseIndex + 1}`, () => {
+    const actual = genDiff(file1, file2, 'stylish');
+    const expected = expectedData.toStylish[caseIndex];
 
     expect(actual).toEqual(expected);
   });
 });
 
-describe.each(nestedCases)('', (caseIndex, file1, file2) => {
-  test(`nested diff ${caseIndex + 1}`, () => {
-    const actual = genDiff(file1, file2);
-    const expected = expectedData.nested[caseIndex];
+describe.each(cases)('', (caseIndex, file1, file2) => {
+  test(`diff plain ${caseIndex + 1}`, () => {
+    const actual = genDiff(file1, file2, 'plain');
+    const expected = expectedData.toPlain[caseIndex];
 
     expect(actual).toEqual(expected);
   });
