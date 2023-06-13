@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 const chars = {
   added: '+ ',
-  deleted: '- ',
+  removed: '- ',
   unchanged: '  ',
 };
 
@@ -34,16 +34,16 @@ const getStylish = (diff) => {
     const lines = node.flatMap(({ key, value, status }) => {
       const updateDepth = depth + 1;
 
-      if (status === 'nested') {
+      if (status === 'complex') {
         return getLine(key, iter(value, updateDepth), chars.unchanged, updateDepth);
       }
 
-      if (status === 'changed') {
+      if (status === 'updated') {
         const oldValue = prepareValue(value.oldValue, updateDepth);
         const newValue = prepareValue(value.newValue, updateDepth);
 
         return [
-          getLine(key, oldValue, chars.deleted, updateDepth),
+          getLine(key, oldValue, chars.removed, updateDepth),
           getLine(key, newValue, chars.added, updateDepth),
         ];
       }
