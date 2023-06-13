@@ -10,20 +10,20 @@ const compareFiles = (data1, data2) => {
     const node = { key };
 
     if (!Object.hasOwn(data1, key)) {
-      node.value = data2[key];
       node.status = 'added';
+      node.value = data2[key];
     } else if (!Object.hasOwn(data2, key)) {
-      node.value = data1[key];
       node.status = 'removed';
-    } else if (data1[key] === data2[key]) {
       node.value = data1[key];
+    } else if (data1[key] === data2[key]) {
       node.status = 'unchanged';
+      node.value = data1[key];
     } else if (_.isPlainObject(data1[key]) && _.isPlainObject(data2[key])) {
-      node.value = compareFiles(data1[key], data2[key]);
       node.status = 'complex';
+      node.value = compareFiles(data1[key], data2[key]);
     } else {
-      node.value = { oldValue: data1[key], newValue: data2[key] };
       node.status = 'updated';
+      node.value = { newValue: data2[key], oldValue: data1[key] };
     }
 
     return node;

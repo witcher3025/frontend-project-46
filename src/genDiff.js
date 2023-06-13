@@ -20,6 +20,7 @@ const genDiff = (filepath1, filepath2, formatName = 'stylish') => {
   const diff = compareFiles(object1, object2);
 
   return getFormatting(diff, formatName);
+  // return compareFiles(object1, object2);
 };
 
 export default genDiff;

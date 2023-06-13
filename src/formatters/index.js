@@ -1,11 +1,13 @@
 /* eslint-disable no-console, import/extensions */
 
-import getStylish from './stylish.js';
+import getJson from './json.js';
 import getPlain from './plain.js';
+import getStylish from './stylish.js';
 
 const formatters = {
-  stylish: getStylish,
+  json: getJson,
   plain: getPlain,
+  stylish: getStylish,
 };
 
 const getFormatting = (diff, formatName) => formatters[formatName](diff);
